@@ -1824,7 +1824,7 @@ end
                 A(end).pixelsize = pixelsize;
                 A(end).unit = unit;
                 %%% CMM ADD IN THE CALIBRATION
-                try
+%                 try
                     pixelsize=ImPixelvalue;
                     unit=ImPixel_Unit;
                     A(end).cal = 1;
@@ -1832,15 +1832,9 @@ end
                     A(end).pixelsize(2) = pixelsize;
                     A(end).pixelsize(3) = 1;
                     A(end).unit = unit;
-                    if strcmp(A(end).unit,'nm')%i like microns
-                        A(end).pixelsize(1) = pixelsize/1000;
-                        A(end).pixelsize(2) = pixelsize/1000;
-                        A(end).pixelsize(3) = 1;
-                        A(end).unit = 'um';
-                    end
-                catch
-                    disp('No calibration data in tiff header in loading line 1700')
-                end
+%                 catch
+%                     disp('No calibration data in tiff header')
+%                 end
                 %%%
                 % intialize the measurement object structure
                 A(end).obj = [];
@@ -2781,14 +2775,9 @@ end
                 A(currentfig).pixelsize(2) = pixelsize;
                 A(currentfig).pixelsize(3) = 1;
                 A(currentfig).unit = unit;
-                if strcmp(A(currentfig).unit,'nm')%i like microns
-                    A(currentfig).pixelsize(1) = pixelsize/1000;
-                    A(currentfig).pixelsize(2) = pixelsize/1000;
-                    A(currentfig).pixelsize(3) = 1;
-                    A(currentfig).unit = 'um';
-                end
+                if unit
             catch
-                disp('No calibration data in tiff header in updatefig line 2700')
+                disp('No calibration data in tiff header')
             end
             %%%%% 
         else
